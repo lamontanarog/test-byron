@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        setUser({ ...parsedUser, isAuthenticated: false });
+        setUser({ ...parsedUser, isAuthenticated: true });
       } catch (error) {
         console.log(error);
         localStorage.removeItem("user");

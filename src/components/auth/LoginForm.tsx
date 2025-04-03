@@ -14,9 +14,14 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    setIsSubmitting(true);
     setError("");
+
+    if (!username.trim() || !password.trim()) {
+      setError("Los campos de usuario y contraseña son obligatorios");
+      return;
+    }
+    setIsSubmitting(true);
+
 
     try {
       const success = login(username, password);
@@ -53,6 +58,7 @@ const LoginForm: React.FC = () => {
             placeholder="Ingrese su usuario"
             disabled={isSubmitting}
             autoComplete="username"
+
           />
         </div>
 
@@ -75,6 +81,7 @@ const LoginForm: React.FC = () => {
           className="login-button"
           isLoading={isSubmitting}
           disabled={isSubmitting}
+          //disabled={!username.trim() || !password.trim()}
         >
           Ingresar
         </Button>

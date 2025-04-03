@@ -7,8 +7,14 @@ interface TaskItemProps {
   onRemoveTask?: (id: number) => Promise<boolean>;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onRemoveTask }) => {
-  const handleToggle = async () => {};
+const TaskItem: React.FC<TaskItemProps> = ({ task, onToggleCompleted, onRemoveTask }) => {
+  const handleToggle = async () => {
+    try {
+        await onToggleCompleted(task.id);
+    } catch (error) {
+      console.error("Error al cambiar el estado de la tarea:", error);
+    }
+  };
 
   const handleRemove = async () => {
     if (onRemoveTask) {
